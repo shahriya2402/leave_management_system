@@ -1,0 +1,47 @@
+{% extends 'basic1.html' %}
+{% block pagecontent %}
+
+<div class="container" style="width=200px;">
+
+<div class="reg-w3">
+
+<div class="w3layouts-main">
+    <div class="col-sm-12">
+                      <center>
+                      <br><header style="color:#98121f;margin-top:-40px"  >
+                            <h3 class="">
+                                                 {% for r in res %}
+                                <b>Welcome-{{r.f_name}} {{r.l_name}}</b>
+                                {% endfor %}
+                            </h3>
+                      </header>
+                 </center>
+             </div>
+    <form action='manager' onsubmit="return employee()" method="post">{% csrf_token %}
+        <center>
+      <br>
+		     <div class="">
+                 {% for r in res %}
+                 <br> <label>Manager-id:</label> <input type="text" name="mid"value="{{r.mid}}" style="color:#000000" required>
+                 <div class="clearfix"> </div>
+                   <br> <label>Email-Id :</label> <input type="text" name="email" value="{{r.email}}"  style="color:#000000" required>
+                    <div class="clearfix"> </div>
+                    <br> <label> Birth Date: </label> <input type="date" name="fdate" value="{{r.fdate}}"  style="color:#000000" required>
+                    <div class="clearfix"> </div>
+                   <br> <label> Contact No:</label> <input type="text" name="cno"value="{{r.cno}}"   style="color:#000000" required>
+                    <div class="clearfix"> </div>
+                 <br> <label> Department:</label> <input type="text" name="dept"value="{{r.dept}}"   style="color:#000000" required>
+                    <div class="clearfix"> </div>
+              <br> <label> Password: </label> <input type="text" name="man_pass" value="{{r.man_pass}}"  style="color:#000000" required>
+                    <div class="clearfix"> </div>
+             <center>
+        {% endfor %}
+        </div>
+        </center>
+	</form>
+    </div>
+<div>
+</div>
+</div>
+
+{% endblock %}

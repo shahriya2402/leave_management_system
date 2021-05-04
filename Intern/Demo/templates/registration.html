@@ -1,0 +1,158 @@
+{% extends 'basic1.html' %}
+{% block pagecontent %}
+<div class="bg"
+     { style=" background: linear-gradient(to bottom, #ff6699 0%, #ff99cc 100%);"}
+  <div class="wrapper wrapper--w680" >
+            <div class="card1 card-4" style="border:thin;">
+                <div class="card-body">
+                    <h1 class="title" style="color:#1bac91"><b>Faculty Registration Form</b></h1>
+                        <form action='F_Registration' onsubmit="return registration()" method="post">{% csrf_token %}
+                        <div class="row row-space1">
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">First Name</label>
+                                    <input class="input--style-4" type="text" id="first_name" name="first_name" required>
+                                </div>
+                            </div>
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Last Name</label>
+                                    <input class="input--style-4" type="text" id="last_name" name="last_name" required>
+                                </div>
+                            </div>
+                        </div>
+ <div class="row row-space1">
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Department</label>
+                                <div class="rs-select2 js-select-simple select--no-search1">
+                                <select name="department" id="department" required>
+                                    <option disabled="disabled" selected="selected">Choose option</option>
+                                    {% for d_name in dept %}
+									<option>{{ d_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <div class="select-dropdown"></div>
+								</div>
+                                </div>
+                            </div>
+                            <div class="col-21">
+                                <div class="input-group1">
+                                     <label class="label">Gender</label>
+                            <div class="rs-select2 js-select-simple select--no-search1">
+                                <select name="gender" id="gender" required>
+                                    <option disabled="disabled" selected="selected">Choose option</option>
+                                    {% for g_name in gen %}
+									<option>{{ g_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <div class="select-dropdown"></div>
+								</div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="row row-space1">
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" type="email" name="email" id="email" required>
+                                </div>
+                            </div>
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Phone Number</label>
+                                    <input class="input--style-4" type="text" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                        </div>
+						<div class="row row-space1">
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Create New Password</label>
+                                    <input class="input--style-4" type="password" id="n_pass" name="n_pass"   required>
+                                </div>
+                            </div>
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Confirm Password</label>
+                                    <input class="input--style-4" type="password" id="c_pass" name="c_pass"  required>
+                                </div>
+                            </div>
+                        </div>
+						<div class="row row-space1">
+                           <div class="p-t-15">
+                            <button  class="btn1 btn--radius-21 btn--blue"  type="submit" style="background-color:#1bac91">Submit</button>
+                        </div>
+                        </div>
+				 </form>
+                </div>
+            </div>
+    </div>
+</div>
+{% block js %}
+<script>
+function employee()
+{
+	var fname= document.getElementById("f_name").value;
+	var lname= document.getElementById("l_name").value;
+	var id= document.getElementById("id").value;
+	var email= document.getElementById("email").value;
+	var ph= document.getElementById("cno").value;
+	var d= document.getElementById("dep");
+	var gend= document.getElementById("gender");
+
+
+    //email id expression code
+	var pwd_expression = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/;
+	var letters = /^[A-Za-z]+$/;
+	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+	if(!letters.test(fname))
+	{
+		alert('First name field required only alphabet characters');
+		return false;
+	}
+	if(!letters.test(lname))
+	{
+		alert('Last name field required only alphabet characters');
+		return false;
+	}
+	else if(document.getElementById("id").value.length < 4)
+	{
+		alert ('phone number minimum length is 4');
+		return false;
+	}
+	else if(document.getElementById("id").value.length > 4)
+	{
+		alert ('phone number maximum length is 4');
+		return false;
+	}
+	else if (!filter.test(email))
+	{
+		alert('Invalid email');
+		return false;
+	}
+	else if(document.getElementById("cno").value.length < 10)
+	{
+		alert ('phone number minimum length is 10');
+		return false;
+	}
+	else if(document.getElementById("cno").value.length > 10)
+	{
+		alert ('phone number maximum length is 10');
+		return false;
+	}
+	else if(d.selectedIndex == 0 || d.options[d.selectedIndex].value == -1)
+	{
+		alert('Please select your department');
+		return false;
+	}
+	else if(gend.selectedIndex == 0 || gend.options[s.selectedIndex].value == -1)
+	{
+		alert('Please select your gender');
+		return false;
+	}
+}
+</script>
+{% endblock %}
+{% endblock %}

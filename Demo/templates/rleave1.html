@@ -1,0 +1,75 @@
+{% extends 'basic.html' %}
+{% block pagecontent %}
+<style>
+table
+{
+    background-color: #FADBD8;
+    overflow:scroll;
+    width:900px;
+}
+table, th, td
+{
+    font-size:15pt;
+    border:2px solid black;
+    border-collapse:collapse;
+    text-align:center;
+}
+th, td {padding: 5px;}
+th { background-color:#524848; color:#ffffff; }
+.my-custom-scrollbar {
+position: relative;
+height: 500px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+</style>
+
+
+{% csrf_token %}
+
+<div class="container" style="margin-right:45px; margin-bottom:20px; margin-top:70px;">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <center>
+            <h2 class="">
+                <b>MANAGER LEAVES-REJECTED</b><br><br>
+            </h2>
+
+            <table border="1">
+                <thead>
+                <tr>
+            <th> Manager ID</th>
+            <th> Manager Name</th>
+            <th> Start Date</th>
+            <th> End Date</th>
+            <th> Leave Type</th>
+            <th> Status </th>
+                 </tr>
+            </thead>
+
+                <tbody>
+    {% csrf_token %}
+    {% for r in res %}
+    <tr>
+        <td><b>{{r.mid}}</b></td>
+        <td><b>{{r.f_name}}</b></td>
+        <td><b>{{r.sdate}}</b></td>
+        <td><b>{{r.edate}}</b></td>
+        <td><b>{{r.ltype}}</b></td>
+        <td><b>{{r.status1}}</b></td>
+
+    </tr>
+   {% endfor %}
+    </tbody>
+            </table>
+        </center>
+
+
+ </div>
+</div>
+    </form>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'basic2.html' %}
+{% block pagecontent %}
+    <div class="container" style="width=200px;">
+
+<div class="reg-w3">
+
+<div class="w3layouts-main">
+    <div class="col-sm-12">
+                      <center>
+                      <br><header style="color:#98121f;margin-top:-40px"  >
+                            <h3 class="">
+                                <b>APPLY FOR LEAVE</b>
+                            </h3>
+                      </header>
+                 </center>
+             </div>
+    <form action='eleave' onsubmit="return employee()" method="post">{% csrf_token %}
+        <center>
+      <br>
+		     <div class="">
+                 {% for r in res %}
+                   <br> <label>Employee-id:</label> <input type="text"   value="{{r.eid}}" name="eid" style="color:#000000" required>
+                 <div class="clearfix"> </div>
+                </div>
+            <div class="">
+                   <br> <label>Employee Name:</label> <input type="text"   value="{{r.f_name}}" name="f_name" style="color:#000000" required>
+                 <div class="clearfix"> </div>
+                {% endfor %}
+                </div>
+             <div class="">
+                    <br> <label> Start_ Date: </label> <input type="date" name="sdate" style="color:#000000">
+                    <div class="clearfix"> </div>
+                </div>
+             <div class="">
+                    <br> <label> End_ Date: </label> <input type="date" name="edate" style="color:#000000">
+                    <div class="clearfix"> </div>
+                </div>
+         <div class="">
+                 <br><label> Leave Type :    </label>
+                 <select name="ltype" id="ltype" style="background-color:#FFFFFF;color:#000000" required>
+						 <option disabled="disabled" selected="selected">Choose option</option>
+						 {% for l in lty %}
+						 <option>{{ l }}</option>
+						 {% endfor %}
+					 </select>
+				 <div class="select-dropdown"></div>
+                </div>
+
+             <center>
+                <h3> <button type="submit" style="color:#000000; margin-top:40px; margin-right:40px; margin-bottom:20px;"> Apply Leave
+              </button></h3><br>
+             </center>
+       </div>
+        </center>
+	</form>
+    </div>
+<div>
+</div>
+</div>
+{% block js %}
+{% endblock %}
+{% endblock %}

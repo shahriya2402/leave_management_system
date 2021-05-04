@@ -1,0 +1,40 @@
+{% extends 'basic.html' %}
+{% block pagecontent %}
+
+<div class="container" style="width=200px;">
+
+<div class="reg-w3">
+
+<div class="w3layouts-main">
+    <div class="col-sm-12">
+                      <center>
+                      <br><header style="color:#98121f;margin-top:-40px"  >
+                            <h3 class="">
+                                                 {% for r in res %}
+                                <b>Welcome HR</b>
+                                {% endfor %}
+                            </h3>
+                      </header>
+                 </center>
+             </div>
+    <form action='hr' onsubmit="return employee()" method="post">{% csrf_token %}
+        <center>
+      <br>
+		     <div class="">
+                 {% for r in res %}
+                 <br> <label>HR-id:</label> <input type="text" name="hrid"value="{{r.hrid}}" style="color:#000000" required>
+                 <div class="clearfix"> </div>
+                    <br> <label> Password: </label> <input type="text" name="n_pass" value="{{r.n_pass}}"  style="color:#000000" required>
+                    <div class="clearfix"> </div>
+             <center>
+        {% endfor %}
+        </div>
+        </center>
+	</form>
+    </div>
+<div>
+</div>
+</div>
+
+{% endblock %}
+

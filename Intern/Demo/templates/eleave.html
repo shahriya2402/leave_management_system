@@ -1,0 +1,129 @@
+{% extends 'basic2.html' %}
+{% block pagecontent %}
+    <div class="container" style="width=200px;">
+
+<div class="reg-w3">
+
+<div class="w3layouts-main">
+    <div class="col-sm-12">
+                      <center>
+                      <br><header style="color:#98121f;margin-top:-40px"  >
+                            <h3 class="">
+                                <b>APPLY FOR LEAVE</b>
+                            </h3>
+                      </header>
+                 </center>
+             </div>
+    <form action='eleave' onsubmit="return employee()" method="post">{% csrf_token %}
+        <center>
+      <br>
+		     <div class="">
+                 {% for r in res %}
+                   <br> <label>Employee-id:</label> <input type="text"   value="{{r.eid}}" name="eid" style="color:#000000" required>
+                 <div class="clearfix"> </div>
+
+                 {% endfor %}
+                </div>
+
+
+         <div class="">
+                    <br> <label> Start_ Date: </label> <input type="date" name="sdate" style="color:#000000">
+                    <div class="clearfix"> </div>
+                </div>
+             <div class="">
+                    <br> <label> End_ Date: </label> <input type="date" name="edate" style="color:#000000">
+                    <div class="clearfix"> </div>
+                </div>
+         <div class="">
+                 <br><label> Leave Type :    </label>
+                 <select name="ltype" id="ltype" style="background-color:#FFFFFF;color:#000000" required>
+						 <option disabled="disabled" selected="selected">Choose option</option>
+						 {% for l in lty %}
+						 <option>{{ l }}</option>
+						 {% endfor %}
+					 </select>
+				 <div class="select-dropdown"></div>
+                </div>
+            <div class="">
+                <br> <label> Reason: </label> <textarea name="rsn" style="color:#000000;margin-bottom:-20px;"></textarea>
+                    <div class="clearfix"> </div>
+                </div>
+
+             <center>
+                <h3> <button type="submit" style="color:#000000; margin-top:40px; margin-right:40px; margin-bottom:20px;"> Apply Leave
+              </button></h3><br>
+             </center>
+       </div>
+        </center>
+	</form>
+    </div>
+<div>
+</div>
+</div>
+{% block js %}
+<script>
+function employee()
+{
+	var fname= document.getElementById("f_name").value;
+	var lname= document.getElementById("l_name").value;
+	var id= document.getElementById("id").value;
+	var email= document.getElementById("email").value;
+	var ph= document.getElementById("cno").value;
+	var d= document.getElementById("dep");
+	var gend= document.getElementById("gender");
+
+
+    //email id expression code
+	var pwd_expression = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/;
+	var letters = /^[A-Za-z]+$/;
+	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+	if(!letters.test(fname))
+	{
+		alert('First name field required only alphabet characters');
+		return false;
+	}
+	if(!letters.test(lname))
+	{
+		alert('Last name field required only alphabet characters');
+		return false;
+	}
+	else if(document.getElementById("id").value.length < 4)
+	{
+		alert ('phone number minimum length is 4');
+		return false;
+	}
+	else if(document.getElementById("id").value.length > 4)
+	{
+		alert ('phone number maximum length is 4');
+		return false;
+	}
+	else if (!filter.test(email))
+	{
+		alert('Invalid email');
+		return false;
+	}
+	else if(document.getElementById("cno").value.length < 10)
+	{
+		alert ('phone number minimum length is 10');
+		return false;
+	}
+	else if(document.getElementById("cno").value.length > 10)
+	{
+		alert ('phone number maximum length is 10');
+		return false;
+	}
+	else if(d.selectedIndex == 0 || d.options[d.selectedIndex].value == -1)
+	{
+		alert('Please select your department');
+		return false;
+	}
+	else if(gend.selectedIndex == 0 || gend.options[s.selectedIndex].value == -1)
+	{
+		alert('Please select your gender');
+		return false;
+	}
+}
+</script>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'basic2.html' %}
+{% block pagecontent %}
+<style>
+table
+{
+    background-color: #FADBD8;
+    overflow:scroll;
+    width:900px;
+}
+table, th, td
+{
+    font-size:15pt;
+    border:2px solid black;
+    border-collapse:collapse;
+    text-align:center;
+}
+th, td {padding: 5px;}
+th { background-color:#524848; color:#ffffff; }
+.my-custom-scrollbar {
+position: relative;
+height: 500px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+</style>
+
+
+
+{% csrf_token %}
+<form action='myleave' method="post">
+<div class="container" style="margin-right:45px; margin-bottom:20px; margin-top:70px;">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <center>
+            <h2 class="">
+                <b>MY LEAVES</b><br><br>
+            </h2>
+
+            <table border="1">
+                <thead>
+                <tr>
+            <th> Employee ID</th>
+            <th> Start Date</th>
+            <th> End Date</th>
+            <th> Leave Type</th>
+            <th> Status</th>
+                 </tr>
+            </thead>
+
+                <tbody>
+    {% csrf_token %}
+    {% for r in res %}
+    <tr>
+        <td><b>{{r.eid}}</b></td>
+        <td><b>{{r.sdate}}</b></td>
+        <td><b>{{r.edate}}</b></td>
+        <td><b>{{r.ltype}}</b></td>
+
+        <td><b>Accept</b></td>
+
+
+    </tr>
+   {% endfor %}
+    </tbody>
+
+
+            </table>
+        </center>
+
+
+ </div>
+</div>
+    </form>
+{% endblock %}
+
+{% block js %}
+<script>
+function employee()
+{
+	var fname= document.getElementById("f_name").value;
+	var lname= document.getElementById("l_name").value;
+	var id= document.getElementById("id").value;
+	var email= document.getElementById("email").value;
+	var ph= document.getElementById("cno").value;
+	var d= document.getElementById("dep");
+	var gend= document.getElementById("gender");
+
+
+    //email id expression code
+	var pwd_expression = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/;
+	var letters = /^[A-Za-z]+$/;
+	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+	if(!letters.test(fname))
+	{
+		alert('First name field required only alphabet characters');
+		return false;
+	}
+	if(!letters.test(lname))
+	{
+		alert('Last name field required only alphabet characters');
+		return false;
+	}
+	else if(document.getElementById("id").value.length < 4)
+	{
+		alert ('phone number minimum length is 4');
+		return false;
+	}
+	else if(document.getElementById("id").value.length > 4)
+	{
+		alert ('phone number maximum length is 4');
+		return false;
+	}
+	else if (!filter.test(email))
+	{
+		alert('Invalid email');
+		return false;
+	}
+	else if(document.getElementById("cno").value.length < 10)
+	{
+		alert ('phone number minimum length is 10');
+		return false;
+	}
+	else if(document.getElementById("cno").value.length > 10)
+	{
+		alert ('phone number maximum length is 10');
+		return false;
+	}
+	else if(d.selectedIndex == 0 || d.options[d.selectedIndex].value == -1)
+	{
+		alert('Please select your department');
+		return false;
+	}
+	else if(gend.selectedIndex == 0 || gend.options[s.selectedIndex].value == -1)
+	{
+		alert('Please select your gender');
+		return false;
+	}
+}
+</script>
+{% endblock %}
